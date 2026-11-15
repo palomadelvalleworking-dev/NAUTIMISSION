@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: nauti-mission
+    runtime: node
+    plan: free
+    buildCommand: npm install --prefix /tmp/nauti-tools --no-package-lock --no-audit --no-fund bun@1.4.4 && /tmp/nauti-tools/node_modules/.bin/bun install --frozen-lockfile && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: 24.22.1
+      - key: NODE_ENV
+        value: production
